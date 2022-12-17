@@ -14,6 +14,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity REG_FILE_UNIT is
     Port (  Clk         : in std_logic;
             Enable      : in std_logic;
+            Reset       : in std_logic;
             RegWrite    : in std_logic;
             ReadAddr1   : in std_logic_vector(adrSize-1 downto 0);
             ReadAddr2   : in std_logic_vector(adrSize-1 downto 0);
@@ -35,6 +36,8 @@ begin
             if Enable='1' and regWrite = '1' then
                 regFile(to_integer(unsigned(WriteAddr))) <=WriteData ;      --Write data at location from write address
             end if;
+        elsif reset='1' then
+            regFile <= (others => (others => '0'));
         end if;
     end process;
     
