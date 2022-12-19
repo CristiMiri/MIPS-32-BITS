@@ -26,7 +26,11 @@ end REG_FILE_UNIT;
 
 architecture Behavioral of REG_FILE_UNIT is
 type memory is array(depth-1 to 0) of STD_LOGIC_VECTOR(length-1 downto 0);  --Memory type 32 array of 32 bits vectors
-signal regFile : memory := (others => X"0000");                             --Memory signal
+signal regFile : memory := (
+std_logic_vector(to_unsigned(0, length)),
+std_logic_vector(to_unsigned(1, length)),
+std_logic_vector(to_unsigned(2, length)),
+others => (others =>'0'));                             --Memory signal
 begin
     regFile(0)<=(others=>'0');      --Register 0 is always 0
     --register write process
@@ -37,7 +41,7 @@ begin
                 regFile(to_integer(unsigned(WriteAddr))) <=WriteData ;      --Write data at location from write address
             end if;
         elsif reset='1' then
-            regFile <= (others => (others => '0'));
+            regFile <= (others => (others => '0')); --  Reset the Registers
         end if;
     end process;
     
