@@ -36,12 +36,13 @@ begin
     --register write process
     process(clk,RegWrite,Enable)			
     begin
-        if falling_edge(clk) then   -- Falling edge for structural hazard
+        if reset='1' then
+            regFile <= (others => (others => '0')); --  Reset the Registers
+        elsif falling_edge(clk) then   -- Falling edge for structural hazard
             if Enable='1' and regWrite = '1' then
                 regFile(to_integer(unsigned(WriteAddr))) <=WriteData ;      --Write data at location from write address
             end if;
-        elsif reset='1' then
-            regFile <= (others => (others => '0')); --  Reset the Registers
+
         end if;
     end process;
     

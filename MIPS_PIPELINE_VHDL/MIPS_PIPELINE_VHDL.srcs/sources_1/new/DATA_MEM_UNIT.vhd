@@ -15,7 +15,7 @@ entity DATA_MEM_UNIT is
 end DATA_MEM_UNIT;
 
 architecture Behavioral of DATA_MEM_UNIT is
-type memory is array(depth -1 downto 0) of STD_LOGIC_VECTOR(length-1 downto 0);  --Memory type 32 array of 32 bits vectors
+type memory is array(depth-1 downto 0) of STD_LOGIC_VECTOR(length-1 downto 0);  --Memory type 32 array of 32 bits vectors
 signal RAM :memory :=(
     std_logic_vector(to_unsigned(1, length)),
     std_logic_vector(to_unsigned(4, length)),

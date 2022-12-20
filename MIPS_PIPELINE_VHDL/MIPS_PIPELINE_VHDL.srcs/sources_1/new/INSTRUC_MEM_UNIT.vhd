@@ -9,7 +9,7 @@ entity INSTRUC_MEM_UNIT is
 end INSTRUC_MEM_UNIT;
 
 architecture Behavioral of INSTRUC_MEM_UNIT is
-type Memory is array (0 to 128) of std_logic_vector(length-1 downto 0);
+type Memory is array (0 to memsize) of std_logic_vector(length-1 downto 0); --A rom memory of 128 by 32 bits
 signal ROM : Memory := (others => (others => '0'));
 begin
 

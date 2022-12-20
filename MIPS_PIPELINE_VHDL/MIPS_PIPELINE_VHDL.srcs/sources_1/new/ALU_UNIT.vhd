@@ -30,8 +30,19 @@ begin
         when "0101" =>  Result <= ArgA or  ArgB;                                        --or  0101
         when "0110" =>  Result <= ArgA xor ArgB;                                        --xor 0110
         when "0111" =>  Result <= std_logic_vector(unsigned(ArgA) sll IntB);            --sll 0111
-        when "0111" =>  Result <= std_logic_vector(unsigned(ArgA) srl IntB);            --srl 1000
-        when "0111" =>  Result <= std_logic_vector(to_unsigned(IntA mod IntB,length));  --mod 1001
+        when "1000" =>  Result <= std_logic_vector(unsigned(ArgA) srl IntB);            --srl 1000
+        when "1001" =>  Result <= std_logic_vector(to_unsigned(IntA mod IntB,length));  --mod 1001
+        when "1010" =>  if IntA <IntB then                                              --blt 1010
+                            Result <= std_logic_vector(to_unsigned(0,length));
+                        else
+                            Result <= std_logic_vector(to_unsigned(1,length));
+                        end if;
+        when "1011" =>  if IntA >IntB then                                              --bgt 1011
+                            Result <= std_logic_vector(to_unsigned(0,length));          
+                        else
+                            Result <= std_logic_vector(to_unsigned(1,length));
+                        end if;
+        when others =>  Result <=std_logic_vector(to_unsigned(1,length));
     end case;
     
     if Result=std_logic_vector(to_unsigned(0,length)) then --Zero is '1' if result from sub is 0 so branch
